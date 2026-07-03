@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy 6 Months</title>
+
+<!-- Bootstrap 5 (handles the mobile/laptop responsive grid) -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- Our own stylesheet -->
+<link rel="stylesheet" href="cSS.css">
+</head>
+<body>
+
+<!-- ================= SCENE 0: FIRST MESSAGE ================= -->
+<section id="message-scene" class="scene d-flex align-items-center justify-content-center">
+  <div class="message-card mx-auto text-center">
+    <p class="message-eyebrow">For My Precious Person</p>
+    <!-- EDIT THIS: your opening message -->
+    <p class="message-body">
+     HAPPY 6 MONTHS BABY.......<br>
+     Actually i could have wriiten a handwritten letter 
+     but i thought i'm a student of computer why not use my skills to write a letter for you my Dear.... And And And i set my mind to do
+     this for you my love and after so so long i finally completed it now.
+     So please please with a big smile click the "continue" button without thinking 
+     any further Hai also a cute runche smile will be even more better for next time it will be even more better
+     By the way i did it by myself no help of Ai oaky okay okay now go go go and click that button.....
+    </p>
+    <button id="to-envelope-btn" class="continue-btn mt-3">Continue</button>
+  </div>
+</section>
+
+<!-- ================= SCENE 1: ENVELOPE ================= -->
+<section id="envelope-scene" class="scene d-none d-flex align-items-center justify-content-center">
+  <div class="envelope-wrap text-center">
+    <div id="envelope" class="envelope mx-auto" role="button" tabindex="0" aria-label="Open the letter">
+      <div class="envelope-back"></div>
+      <div class="envelope-letter-peek"></div>
+      <div class="envelope-flap"></div>
+      <div class="envelope-seal">
+        <span>P&nbsp;&amp;&nbsp;D</span>
+      </div>
+    </div>
+    <p class="envelope-hint mt-4">Happy 6 Months Dear</p>
+    <p class="envelope-subhint">Tadahhh See a Cute envelope. how is it..?<br> I think it is cute now now go tap that seal </p>
+  </div>
+</section>
+
+<!-- ================= SCENE 2: LETTER + MONTHS ================= -->
+<section id="letter-scene" class="scene d-none">
+  <div class="container-fluid letter-container py-4 py-md-5">
+
+    <header class="text-center mb-4 mb-md-5">
+      <h1 class="title-script">Happy 6 Months Baby</h1>
+      <p class="title-sub">Pritam &amp; Dia — a scroll of the months we've kept</p>
+    </header>
+
+    <div class="row g-4 g-md-5 justify-content-center align-items-start">
+
+      <!-- Month scroll / tabs -->
+      <div class="col-12 col-md-5 col-lg-4">
+        <div class="month-scroll">
+          <div class="scroll-spine" aria-hidden="true"></div>
+          <ul class="month-list list-unstyled m-0" id="month-list">
+            <li data-month="1"><button class="month-tab">1<sup>st</sup> Month</button></li>
+            <li data-month="2"><button class="month-tab">2<sup>nd</sup> Month</button></li>
+            <li data-month="3"><button class="month-tab">3<sup>rd</sup> Month</button></li>
+            <li data-month="4"><button class="month-tab">4<sup>th</sup> Month</button></li>
+            <li data-month="5"><button class="month-tab">5<sup>th</sup> Month</button></li>
+            <li data-month="6"><button class="month-tab">6<sup>th</sup> Month</button></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Photo + note frame -->
+      <div class="col-12 col-md-7 col-lg-7">
+
+        <!-- Default state: dim film-reel strip of all 6 photos -->
+        <div id="fan-gallery" class="fan-gallery" aria-label="All months">
+          <p class="fan-hint text-center mb-3">Sorry beacause of my busy schedule i can only do this much<br> Now Now go select the 1st month & another & another and go with the flow</p>
+          <div class="fan-wrap" id="fan-wrap"><!-- photo cards injected by script.js --></div>
+        </div>
+
+        <!-- Single month detail view -->
+        <div id="month-detail" class="month-detail d-none">
+          <button id="back-to-gallery" class="back-btn mb-3">&larr; all months</button>
+
+          <div class="photo-frame mx-auto">
+            <div class="photo-frame-inner">
+              <img id="month-photo" src="" alt="">
+            </div>
+            <p class="photo-caption" id="month-title">Month</p>
+          </div>
+
+          <div class="note-area mt-4">
+            <p class="note-label">Hi Baby</p>
+            <p id="month-note" class="note-display"></p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js.js"></script>
+</body>
+</html>

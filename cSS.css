@@ -1,0 +1,347 @@
+:root{
+  --ink: #0e1b2c;
+  --ink-deep: #081119;
+  --parchment: #f6ecd9;
+  --parchment-shadow: #e6d8ba;
+  --gold: #c9a15a;
+  --gold-light: #e3c07f;
+  --rose: #b5495b;
+  --charcoal: #2a2420;
+}
+
+*{ box-sizing: border-box; }
+
+body{
+  margin:0;
+  min-height:100vh;
+  background: var(--ink);
+  background-image:
+    radial-gradient(ellipse at 20% 10%, rgba(201,161,90,0.08), transparent 55%),
+    radial-gradient(ellipse at 80% 90%, rgba(181,73,91,0.08), transparent 55%);
+  font-family:'Cormorant Garamond', serif;
+  color: var(--parchment);
+  overflow-x:hidden;
+}
+
+.scene{ min-height:100vh; width:100%; }
+
+/* ============ SCENE 0: FIRST MESSAGE ============ */
+.message-card{
+  max-width: 480px;
+  padding: 0 1.5rem;
+}
+.message-eyebrow{
+  font-family:'Space Grotesk', sans-serif;
+  font-size:.75rem;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color: var(--gold-light);
+  opacity:.8;
+  margin-bottom: 1rem;
+}
+.message-body{
+  font-family:'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1.2rem, 3.4vw, 1.6rem);
+  line-height:1.6;
+  color: var(--parchment);
+}
+.continue-btn{
+  background: var(--rose);
+  color: var(--parchment);
+  border:none;
+  padding: .65rem 1.8rem;
+  border-radius: 24px;
+  font-family:'Space Grotesk', sans-serif;
+  font-size:.82rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition: background .2s ease, transform .2s ease;
+}
+.continue-btn:hover{ background:#943c4b; transform: translateY(-2px); }
+
+/* ============ SCENE 1: ENVELOPE ============ */
+.envelope-hint{
+  font-family:'Playfair Display', serif;
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
+  color: var(--parchment);
+  letter-spacing: .02em;
+}
+.envelope-subhint{
+  font-family:'Space Grotesk', sans-serif;
+  font-size:.8rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color: var(--gold-light);
+  opacity:.75;
+}
+
+.envelope{
+  position:relative;
+  width: min(78vw, 340px);
+  aspect-ratio: 3 / 2;
+  cursor:pointer;
+  perspective: 1200px;
+}
+.envelope-back{
+  position:absolute; inset:0;
+  background: linear-gradient(160deg, #16263a, #0c1826);
+  border:1px solid rgba(201,161,90,.35);
+  border-radius:6px;
+  box-shadow: 0 20px 45px rgba(0,0,0,.45);
+}
+.envelope-letter-peek{
+  position:absolute;
+  left:8%; right:8%; top:-14%;
+  height:60%;
+  background: var(--parchment);
+  border-radius:4px 4px 0 0;
+  box-shadow: 0 -4px 10px rgba(0,0,0,.15) inset;
+  transition: transform .9s cubic-bezier(.2,.8,.2,1);
+  z-index:1;
+}
+.envelope-flap{
+  position:absolute;
+  top:0; left:0; right:0;
+  height:58%;
+  width:100%;
+  background: linear-gradient(160deg, #223a58, #16263a);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top center;
+  transition: transform .9s cubic-bezier(.3,.7,.3,1);
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,.35));
+  z-index:2;
+  backface-visibility: hidden;
+}
+.envelope-seal{
+  position:absolute;
+  top:38%; left:50%;
+  width:58px; height:58px;
+  transform:translate(-50%,-50%);
+  background: radial-gradient(circle at 32% 28%, var(--gold-light), var(--gold) 60%, #8a6c34 100%);
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow: 0 4px 10px rgba(0,0,0,.4), inset 0 2px 3px rgba(255,255,255,.35);
+  z-index:3;
+  transition: transform .5s ease, opacity .5s ease;
+}
+.envelope-seal span{
+  font-family:'Playfair Display', serif;
+  font-weight:700;
+  font-size:.68rem;
+  color: #4a3512;
+  letter-spacing:.03em;
+}
+
+/* open animation */
+.envelope.open .envelope-flap{
+  transform: rotateX(180deg);
+}
+.envelope.open .envelope-seal{
+  transform:translate(-50%,-50%) scale(0);
+  opacity:0;
+}
+.envelope.open .envelope-letter-peek{
+  transform: translateY(-38%);
+}
+
+/* ============ SCENE 2: LETTER ============ */
+.letter-container{ max-width:1100px; margin:0 auto; }
+
+.title-script{
+  font-family:'Playfair Display', serif;
+  font-weight:700;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  color: var(--gold-light);
+  margin-bottom:.25rem;
+}
+.title-sub{
+  font-family:'Space Grotesk', sans-serif;
+  font-size:.78rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color: rgba(246,236,217,.6);
+}
+
+/* --- month scroll (paper roll with tabs) --- */
+.month-scroll{
+  position:relative;
+  background: linear-gradient(180deg, var(--parchment), var(--parchment-shadow));
+  border-radius: 10px;
+  padding: 1.5rem 1.25rem 1.5rem 2.2rem;
+  box-shadow: 0 18px 40px rgba(0,0,0,.35);
+}
+.scroll-spine{
+  position:absolute; left:0; top:0; bottom:0; width:14px;
+  background: repeating-linear-gradient(180deg, var(--gold) 0 6px, #a9803f 6px 8px);
+  border-radius: 10px 0 0 10px;
+}
+.month-list li{ margin-bottom: .65rem; }
+.month-list li:last-child{ margin-bottom:0; }
+
+.month-tab{
+  width:100%;
+  text-align:left;
+  border:1px solid rgba(42,36,32,.18);
+  background: #fffdf8;
+  color: var(--charcoal);
+  font-family:'Playfair Display', serif;
+  font-size:1.05rem;
+  padding: .7rem 1rem;
+  border-radius: 6px;
+  cursor:pointer;
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,.08);
+}
+.month-tab sup{ font-size:.6em; }
+.month-tab:hover{
+  transform: translateX(6px);
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,.15);
+}
+.month-list li.active .month-tab{
+  background: var(--rose);
+  color: var(--parchment);
+  border-color: var(--rose);
+  transform: translateX(6px);
+}
+
+/* --- film-reel photo gallery (default state) --- */
+.fan-hint{
+  font-family:'Space Grotesk', sans-serif;
+  font-size:.8rem;
+  letter-spacing:.05em;
+  color: rgba(246,236,217,.65);
+}
+.fan-wrap{
+  display:flex;
+  gap: 10px;
+  background:#000;
+  padding: 22px 14px;
+  border-radius: 4px;
+  overflow-x:auto;
+  position:relative;
+}
+.fan-wrap::before,
+.fan-wrap::after{
+  content:"";
+  position:absolute; left:0; right:0; height:14px;
+  background-image: radial-gradient(circle, var(--parchment) 0 3px, transparent 3.5px);
+  background-size: 20px 14px;
+  background-repeat: repeat-x;
+  background-position: 8px center;
+  opacity:.55;
+}
+.fan-wrap::before{ top:0; }
+.fan-wrap::after{ bottom:0; }
+
+.fan-card{
+  flex: 0 0 108px;
+  background:none;
+  padding:0;
+  box-shadow:none;
+  display:flex;
+  flex-direction:column;
+}
+.fan-card .fan-photo{
+  width:108px;
+  aspect-ratio: 4/5;
+  background: linear-gradient(160deg, #6b5f47, #3a3226);
+  border-radius:2px;
+  display:flex; align-items:center; justify-content:center;
+  color: rgba(246,236,217,.3);
+  font-size:1.2rem;
+  overflow:hidden;
+  filter: brightness(.55) saturate(.85);
+}
+.fan-card .fan-label{
+  font-family:'Space Grotesk', sans-serif;
+  font-size:.6rem;
+  color: rgba(246,236,217,.5);
+  text-align:center;
+  margin-top:5px;
+  letter-spacing:.06em;
+}
+
+@media (max-width: 480px){
+  .fan-card{ flex-basis: 92px; }
+  .fan-card .fan-photo{ width:92px; }
+}
+
+/* --- single month detail --- */
+.back-btn{
+  background:none;
+  border:none;
+  color: var(--gold-light);
+  font-family:'Space Grotesk', sans-serif;
+  font-size:.85rem;
+  letter-spacing:.05em;
+  cursor:pointer;
+  padding:0;
+}
+.back-btn:hover{ color: var(--parchment); }
+
+.photo-frame{
+  max-width: 360px;
+  background: var(--parchment);
+  padding: 14px 14px 34px 14px;
+  border-radius: 4px;
+  box-shadow: 0 20px 40px rgba(0,0,0,.45);
+  transform: rotate(-1.2deg);
+}
+.photo-frame-inner{
+  aspect-ratio: 4/5;
+  background: linear-gradient(160deg, #d8c7a1, #b79a68);
+  border-radius:2px;
+  overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+}
+.photo-frame-inner img{
+  width:100%; height:100%; object-fit:cover; display:block;
+}
+.photo-caption{
+  font-family:'Playfair Display', serif;
+  font-style:italic;
+  text-align:center;
+  color: var(--charcoal);
+  margin: .6rem 0 0 0;
+  font-size:1.15rem;
+}
+
+.note-area{ max-width:360px; }
+.note-label{
+  display:block;
+  font-family:'Space Grotesk', sans-serif;
+  font-size:.75rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color: var(--gold-light);
+  margin-bottom:.4rem;
+}
+.note-display{
+  background: var(--parchment);
+  color: var(--charcoal);
+  border-radius:6px;
+  padding: .9rem 1.1rem;
+  margin:0;
+  font-family:'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size:1.15rem;
+  line-height:1.55;
+  box-shadow: 0 10px 22px rgba(0,0,0,.3);
+  min-height: 2.4em;
+}
+.mail-btn{
+  background: none;
+  color: var(--gold-light);
+  border: 1px solid var(--gold);
+  padding: .5rem 1.2rem;
+  border-radius: 20px;
+  font-family:'Space Grotesk', sans-serif;
+  font-size:.8rem;
+  letter-spacing:.06em;
+  cursor:pointer;
+  transition: background .2s ease, color .2s ease;
+}
+.mail-btn:hover{ background: var(--gold); color: var(--ink-deep); }
